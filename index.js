@@ -8,9 +8,10 @@
  */
 function trimProperties(obj) {
   // ✨ implement
-  return obj.trim();
+  const result = {};
+  Object.keys(obj).map((x) => (result[x] = obj[x].trim()));
+  return result;
 }
-
 /**
  * [Exercise 2] trimPropertiesMutation trims in place the properties of an object
  * @param {object} obj - an object with properties that are strings
@@ -21,6 +22,8 @@ function trimProperties(obj) {
  */
 function trimPropertiesMutation(obj) {
   // ✨ implement
+  Object.keys(obj).map((x) => (obj[x] = obj[x].trim()));
+  return obj;
 }
 
 /**
@@ -33,7 +36,21 @@ function trimPropertiesMutation(obj) {
  */
 function findLargestInteger(integers) {
   // ✨ implement
+  const numArray = integers.map((x) => x.integer);
+  let i;
+  let max = numArray[0];
+  for (i = 0; i < numArray.length; i++) {
+    if (numArray[i] > max) max = numArray[i];
+  }
+  return max;
+  // const numArray = [];
+  // Object.keys(integers).map((x) => (integers[x] = numArray.push(integers[x])));
+  // return numArray;
 }
+
+// console.log(
+//   findLargestInteger([{ integer: 1 }, { integer: 3 }, { integer: 2 }])
+// );
 
 class Counter {
   /**
@@ -41,6 +58,8 @@ class Counter {
    * @param {number} initialNumber - the initial state of the count
    */
   constructor(initialNumber) {
+    this.count = initialNumber;
+
     // ✨ initialize whatever properties are needed
   }
 
@@ -58,6 +77,10 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    if (this.count > 0) {
+      return this.count--;
+    }
+    return this.count;
   }
 }
 
@@ -67,6 +90,18 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasons = ["summer", "fall", "winter", "spring"];
+    this.currentSeason = 0;
+
+    // if (this.count === 1) {
+    //   return this.season === "summer";
+    // } else if (this.count === 2) {
+    //   return this.season === " fall";
+    // } else if (this.count === 3) {
+    //   return this.season === "winter";
+    // } else {
+    //   return this.season === "spring";
+    // }
   }
 
   /**
@@ -83,6 +118,14 @@ class Seasons {
    */
   next() {
     // ✨ implement
+
+    const result = this.seasons[this.currentSeason];
+    if (this.currentSeason === 3) {
+      this.currentSeason = 0;
+    } else {
+      ++this.currentSeason;
+    }
+    return result;
   }
 }
 
