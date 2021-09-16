@@ -140,6 +140,8 @@ class Car {
     this.odometer = 0; // car initilizes with zero miles
     this.tank = tankSize; // car initiazes full of gas
     // ✨ initialize whatever other properties are needed
+    this.tankSize = tankSize;
+    this.mpg = mpg;
   }
 
   /**
@@ -156,7 +158,16 @@ class Car {
    * focus.drive(200) // returns 600 (ran out of gas after 100 miles)
    */
   drive(distance) {
-    // ✨ implement
+    const driveDistance = this.tank * this.mpg;
+
+    if (distance <= driveDistance) {
+      this.odometer += distance;
+      this.tank = this.tank - distance / this.mpg;
+    } else {
+      this.odometer = this.odometer + driveDistance;
+      this.tank = 0;
+    }
+    return this.odometer;
   }
 
   /**
@@ -172,6 +183,13 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    const howMany = this.tankSize - this.tank;
+    if (gallons <= howMany) {
+      this.tank = this.tank + gallons;
+    } else {
+      this.tank = this.tankSize;
+    }
+    return this.tank * this.mpg;
   }
 }
 
@@ -190,6 +208,11 @@ class Car {
  */
 function isEvenNumberAsync(number) {
   // ✨ implement
+  if (number % 2 === 0) {
+    return "true";
+  } else {
+    return "false";
+  }
 }
 
 module.exports = {
